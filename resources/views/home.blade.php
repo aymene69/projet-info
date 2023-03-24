@@ -1,3 +1,3 @@
-@include('header')
+@include('layouts.header')
         <p>Salut</p>
-@include('footer')
+@include('layouts.footer')

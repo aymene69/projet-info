@@ -1,5 +1,5 @@
 <?php
-$user = false;
+$user = auth()->user();
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -25,8 +25,9 @@ $user = false;
                 </ul>
                 <ul class="navbar-nav">
                     @if ($user)
+                    <p class="nav-link">Bonjour, {{ $user->prenom }}</p>
                     <li class="nav-item">
-                        Bonjour, {{ $user->name }} <a class="nav-link" href="">Déconnexion</a>
+                        <a class="nav-link" href="">Déconnexion</a>
                     </li>
                     @else
                     <li class="nav-item">
