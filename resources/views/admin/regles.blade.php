@@ -26,21 +26,21 @@ $user = auth()->user();
     </div>
 </nav>
 <div class="container-fluid">
-    <h2>Modifier les types</h2>
+    <h2>Modifier les règles</h2>
     <p>
-        <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterType" role="button" aria-expanded="false" aria-controls="ajouterType">
-            Ajouter un type
+        <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterRegle" role="button" aria-expanded="false" aria-controls="ajouterRegle">
+            Ajouter une règle
         </a>
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#modifierType" role="button" aria-expanded="false" aria-controls="modifierType">
-            Modifier un type
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#modifierRegle" role="button" aria-expanded="false" aria-controls="modifierRegle">
+            Modifier une règle
         </a>
-        <a class="btn btn-danger" data-bs-toggle="collapse" href="#supprimerType" role="button" aria-expanded="false" aria-controls="supprimerType">
-            Supprimer un type
+        <a class="btn btn-danger" data-bs-toggle="collapse" href="#supprimerRegle" role="button" aria-expanded="false" aria-controls="supprimerRegle">
+            Supprimer une règle
         </a>
     </p>
         <br>
-        <div class="collapse" id="ajouterType">
-            <form method="POST" action="/admin/ajoutertype">
+        <div class="collapse" id="ajouterRegle">
+            <form method="POST" action="/admin/ajouterregle">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="nomType">Nom du type:</label>
@@ -51,8 +51,8 @@ $user = auth()->user();
                 </div>
             </form>
         </div>
-        <div class="collapse" id="modifierType">
-            <form method="POST" action="/admin/edittype">
+        <div class="collapse" id="modifierRegle">
+            <form method="POST" action="/admin/modifregle">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">
@@ -70,8 +70,8 @@ $user = auth()->user();
                 </div>
             </form>
         </div>
-        <div class="collapse" id="supprimerType">
-            <form method="POST" action="/admin/supprimertype">
+        <div class="collapse" id="supprimerRegle">
+            <form method="POST" action="/admin/supprimerregle">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">

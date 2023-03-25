@@ -18,6 +18,9 @@ $user = auth()->user();
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('editquestions')}}">Modifier/Ajouter questions</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('editregles')}}">Modifier/Ajouter règles</a>
+                </li>
             </ul>
         </div>
     </div>

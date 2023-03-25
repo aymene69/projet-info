@@ -24,6 +24,11 @@ class AdminController extends Controller
         return view('admin.edit');
     }
 
+    public function editregles()
+    {
+        return view('admin.regles');
+    }
+
     public function ajoutertype()
     {
         $data = request(['nomType']);
@@ -77,5 +82,33 @@ class AdminController extends Controller
         DB::table('question')->where('id', $data['question'])->delete();
 
         return redirect()->route('editquestions');
+    }
+
+    public function ajouterregle()
+    {
+        $data = request(['regle']);
+        DB::table('regle')->insert([
+            'regle' => $data['regle']
+        ]);
+
+        return redirect()->route('editregles');
+    }
+
+    public function modifregle()
+    {
+        $data = request(['regle', 'nouvelleRegle']);
+        DB::table('regle')->where('id', $data['regle'])->update([
+            'regle' => $data['nouvelleRegle']
+        ]);
+
+        return redirect()->route('editregles');
+    }
+
+    public function supprimerregle()
+    {
+        $data = request(['regle']);
+        DB::table('regle')->where('id', $data['regle'])->delete();
+
+        return redirect()->route('editregles');
     }
 }

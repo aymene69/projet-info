@@ -19,6 +19,9 @@ $types = DB::connection('mysql')->table('question_type')->get();
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('editquestions')}}">Modifier/Ajouter questions</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('editregles')}}">Modifier/Ajouter règles</a>
+                </li>
             </ul>
         </div>
     </div>
