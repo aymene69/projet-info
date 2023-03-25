@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -26,3 +27,5 @@ Route::post('/register', [RegistrationController::class, 'store']);
 Route::get('/login', [SessionsController::class, 'create'])->name('login');
 Route::post('/login', [SessionsController::class, 'store']);
 Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');

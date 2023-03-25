@@ -10,31 +10,36 @@ $user = auth()->user();
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Quizz</a>
+            <a class="navbar-brand" href="{{route('home')}}">Quizz</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Accueil</a>
+                        <a class="nav-link" href="{{route('home')}}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Règles</a>
+                        <a class="nav-link" href="{{route('regles')}}">Règles</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     @if ($user)
                     <p class="nav-link">Bonjour, {{ $user->prenom }}</p>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Déconnexion</a>
+                        <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>
                     </li>
+                    @if($user->adminRole==1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin')}}">Panel administrateur</a>
+                    </li>
+                    @endif
                     @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('login')}}">Se connecter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{  url('/register') }}">Inscription</a>
+                        <a class="nav-link" href="{{route('register')}}">Inscription</a>
                     </li>
                     @endif
                 </ul>

@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('prenom');
             $table->string('nom');
             $table->string('email')->unique();
             $table->string('password');
-            $table->int('score');
-            $table->int('nbParties');
-            $table->int('nbVictoires');
-            $table->int('nbDefaites');
-            $table->int('nbIndices');
-            $table->int('nbIndicesUtilises');
+            $table->string('score')->default(0);
+            $table->string('nbParties')->default(0);
+            $table->string('nbVictoires')->default(0);
+            $table->string('nbDefaites')->default(0);
+            $table->string('nbIndices')->default(5);
+            $table->string('nbIndicesUtilises')->default(0);
+            $table->string('adminRole')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
