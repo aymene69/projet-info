@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('reponse3');
             $table->string('reponse4');
             $table->string('indice');
+            $table->string('explication');
             $table->string('questionType');
             $table->string('questionLevel');
             $table->string('questionImage');

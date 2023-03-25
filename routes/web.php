@@ -31,3 +31,6 @@ Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/questions', [AdminController::class, 'listequestions'])->name('listequestions');
 Route::get('/admin/editquestions', [AdminController::class, 'editquestions'])->name('editquestions');
+Route::post('/admin/ajoutertype', [AdminController::class, 'ajoutertype'])->name('ajoutertype');
+Route::post('/admin/edittype', [AdminController::class, 'edittype'])->name('edittype');
+Route::post('/admin/supprimertype', [AdminController::class, 'supprimertype'])->name('supprimertype');

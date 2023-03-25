@@ -24,6 +24,77 @@ $user = auth()->user();
 </nav>
 <div class="container-fluid">
     <h2>Modifier les questions</h2>
+    <p>
+        <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterType" role="button" aria-expanded="false" aria-controls="ajouterType">
+            Ajouter un type
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#modifierType" role="button" aria-expanded="false" aria-controls="modifierType">
+            Modifier un type
+        </a>
+        <a class="btn btn-danger" data-bs-toggle="collapse" href="#supprimerType" role="button" aria-expanded="false" aria-controls="supprimerType">
+            Supprimer un type
+        </a>
+    </p>
+        <br>
+        <div class="collapse" id="ajouterType">
+            <form method="POST" action="/admin/ajoutertype">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="nomType">Nom du type:</label>
+                    <input type="text" class="form-control" id="nomType" name="nomType" required="required">
+                </div>
+                <div class="form-group">
+                    <button style="cursor:pointer" type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            </form>
+        </div>
+        <div class="collapse" id="modifierType">
+            <form method="POST" action="/admin/edittype">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">
+                        @foreach(DB::connection('mysql')->table('question_type')->get() as $type)
+                            <option value="{{$type->questionType}}">{{$type->questionType}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nomType">Nouveau nom du type:</label>
+                    <input type="text" class="form-control" id="nouveauNomType" name="nouveauNomType" required="required">
+                </div>
+                <div class="form-group">
+                    <button style="cursor:pointer" type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+            </form>
+        </div>
+        <div class="collapse" id="supprimerType">
+            <form method="POST" action="/admin/supprimertype">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">
+                        @foreach(DB::connection('mysql')->table('question_type')->get() as $type)
+                            <option value="{{$type->questionType}}">{{$type->questionType}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button style="cursor:pointer" type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </form>
+        </div>
+        <br>
+    <p>
+        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Ajouter une question
+        </a>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Modifier une question
+        </a>
+        <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Supprimer une question
+        </a>
+    </p>
+
 </div>
 @else
 @php
