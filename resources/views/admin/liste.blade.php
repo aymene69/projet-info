@@ -1,5 +1,6 @@
 <?php
 $user = auth()->user();
+$types = DB::connection('mysql')->table('question_type')->get();
 ?>
 @include('layouts.header')
 @if($user!=null)
@@ -23,7 +24,38 @@ $user = auth()->user();
     </div>
 </nav>
 <div class="container-fluid">
-    <h2>Bienvenue sur le panel administrateur</h2>
+    <h2>Liste des questions</h2>
+    @foreach ($types as $type)
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#type{{$type->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            {{$type->questionType}}
+        </a>
+    </p>
+    <div class="collapse" id="type{{$type->id}}">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID question</th>
+                <th scope="col">Question</th>
+                <th scope="col">Réponse</th>
+                <th scope="col">Indice</th>
+                <th scope="col">Difficulté</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DB::connection('mysql')->table('question')->where('questionType', $type->questionType)->get() as $question)
+                <tr>
+                    <th scope="row">{{$question->id}}</th>
+                    <td>{{$question->question}}</td>
+                    <td>{{$question->reponse}}</td>
+                    <td>{{$question->indice}}</td>
+                    <td>{{$question->questionLevel}}</td>
+                </tr>
+                @endforeach
+        </table>
+    </div>
+    @endforeach
+
 </div>
 @else
 @php

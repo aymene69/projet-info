@@ -17,9 +17,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', function () {return view('home');})->name('home');
+
+Route::get('/regles', [RegistrationController::class, 'create'])->name('regles');
 
 Route::get('/register', [RegistrationController::class, 'create'])->name('register');
 Route::post('/register', [RegistrationController::class, 'store']);
@@ -29,3 +29,5 @@ Route::post('/login', [SessionsController::class, 'store']);
 Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin/questions', [AdminController::class, 'listequestions'])->name('listequestions');
+Route::get('/admin/editquestions', [AdminController::class, 'editquestions'])->name('editquestions');

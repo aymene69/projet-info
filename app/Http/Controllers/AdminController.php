@@ -11,4 +11,14 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+
+    public function listequestions()
+    {
+        return view('admin.liste');
+    }
+
+    public function editquestions()
+    {
+        return view('admin.edit');
+    }
 }

@@ -23,7 +23,7 @@ $user = auth()->user();
     </div>
 </nav>
 <div class="container-fluid">
-    <h2>Bienvenue sur le panel administrateur</h2>
+    <h2>Modifier les questions</h2>
 </div>
 @else
 @php
