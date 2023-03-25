@@ -18,12 +18,11 @@ use App\Http\Controllers\SessionsController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
-Route::get('/register', [RegistrationController::class, 'create']);
+Route::get('/register', [RegistrationController::class, 'create'])->name('register');
 Route::post('/register', [RegistrationController::class, 'store']);
 
-
-Route::get('/login', 'SessionsController@create');
-Route::post('/login', 'SessionsController@store');
-Route::get('/logout', 'SessionsController@destroy');
+Route::get('/login', [SessionsController::class, 'create'])->name('login');
+Route::post('/login', [SessionsController::class, 'store']);
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');

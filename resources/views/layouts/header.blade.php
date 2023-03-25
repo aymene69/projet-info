@@ -31,7 +31,7 @@ $user = auth()->user();
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{  url('/login') }}">Se connecter</a>
+                        <a class="nav-link" href="{{route('login')}}">Se connecter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{  url('/register') }}">Inscription</a>

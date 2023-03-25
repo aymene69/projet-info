@@ -8,24 +8,25 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        return view('sessions.create');
+        return view('connexion.create');
     }
 
     public function store()
     {
         if (auth()->attempt(request(['email', 'password'])) == false) {
-            return back()->withErrors([
-                'message' => 'The email or password is incorrect, please try again'
+            return view('connexion.create')->with([
+                'message' => 'The email or password is incorrect, please try again',
+                'failed' => true,
             ]);
         }
 
-        return redirect()->to('/games');
+        return redirect()->to('/');
     }
 
     public function destroy()
     {
         auth()->logout();
 
-        return redirect()->to('/games');
+        return redirect()->to('/');
     }
 }

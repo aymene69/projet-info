@@ -40,4 +40,9 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

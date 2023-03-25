@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('nom');
             $table->string('email')->unique();
             $table->string('password');
+            $table->int('score');
+            $table->int('nbParties');
+            $table->int('nbVictoires');
+            $table->int('nbDefaites');
+            $table->int('nbIndices');
+            $table->int('nbIndicesUtilises');
             $table->rememberToken();
             $table->timestamps();
         });
