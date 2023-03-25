@@ -54,19 +54,27 @@ class AdminController extends Controller
 
     public function ajouterquestion()
     {
-        $data = request(['image', 'question', 'reponse', 'reponse2', 'reponse3', 'reponse4', 'explication', 'questionType', 'questionLevel', 'questionImage']);
-        DB::table('question_type')->insert([
-            'image' => $data['image'],
+        $data = request(['question', 'reponse', 'reponse2', 'reponse3', 'reponse4', 'indice', 'explication', 'questionType', 'questionLevel', 'questionImage', 'image']);
+        DB::table('question')->insert([
             'question' => $data['question'],
             'reponse' => $data['reponse'],
             'reponse2' => $data['reponse2'],
             'reponse3' => $data['reponse3'],
             'reponse4' => $data['reponse4'],
+            'indice' => $data['indice'],
             'explication' => $data['explication'],
             'questionType' => $data['questionType'],
             'questionLevel' => $data['questionLevel'],
-            'questionImage' => $data['questionImage']
+            'questionImage' => $data['image']
         ]);
+
+        return redirect()->route('editquestions');
+    }
+
+    public function supprimerquestion()
+    {
+        $data = request(['question']);
+        DB::table('question')->where('id', $data['question'])->delete();
 
         return redirect()->route('editquestions');
     }
