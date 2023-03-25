@@ -23,7 +23,7 @@ $user = auth()->user();
     </div>
 </nav>
 <div class="container-fluid">
-    <h2>Modifier les questions</h2>
+    <h2>Modifier les types</h2>
     <p>
         <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterType" role="button" aria-expanded="false" aria-controls="ajouterType">
             Ajouter un type
@@ -83,6 +83,7 @@ $user = auth()->user();
             </form>
         </div>
         <br>
+        <h2>Modifier les questions</h2>
     <p>
         <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterQuestion" role="button" aria-expanded="false" aria-controls="ajouterQuestion">
             Ajouter une question
