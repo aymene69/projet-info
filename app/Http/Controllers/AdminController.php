@@ -62,8 +62,9 @@ class AdminController extends Controller
     public function ajouterquestion(Request $request)
     {
         $data = request(['question', 'reponse', 'reponse2', 'reponse3', 'reponse4', 'indice', 'explication', 'questionType', 'questionLevel', 'questionImage', 'image']);
-        $fileName = time().'.'.$data['image']->extension();
-        $request->file->move(public_path('uploads'), $fileName);
+        dd($request->file->extension());
+        $fileName = time().'.'.$request->files->extension();
+        $data['image']->file->move(public_path('uploads'), $fileName);
         DB::table('question')->insert([
             'question' => $data['question'],
             'reponse' => $data['reponse'],
