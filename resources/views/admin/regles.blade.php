@@ -43,8 +43,8 @@ $user = auth()->user();
             <form method="POST" action="/admin/ajouterregle">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="nomType">Nom du type:</label>
-                    <input type="text" class="form-control" id="nomType" name="nomType" required="required">
+                    <label for="regle">Nom de la règle:</label>
+                    <input type="text" class="form-control" id="regle" name="regle" required="required">
                 </div>
                 <div class="form-group">
                     <button style="cursor:pointer" type="submit" class="btn btn-success">Ajouter</button>
@@ -55,15 +55,15 @@ $user = auth()->user();
             <form method="POST" action="/admin/modifregle">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">
-                        @foreach(DB::connection('mysql')->table('question_type')->get() as $type)
-                            <option value="{{$type->questionType}}">{{$type->questionType}}</option>
+                    <select class="form-select" aria-label="regle" id="regle" name="regle" required="required">
+                        @foreach(DB::connection('mysql')->table('regles')->get() as $regle)
+                            <option value="{{$regle->id}}">{{$regle->regle}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="nomType">Nouveau nom du type:</label>
-                    <input type="text" class="form-control" id="nouveauNomType" name="nouveauNomType" required="required">
+                    <label for="nouvelleRegle">Nouvelle règle:</label>
+                    <input type="text" class="form-control" id="nouvelleRegle" name="nouvelleRegle" required="required">
                 </div>
                 <div class="form-group">
                     <button style="cursor:pointer" type="submit" class="btn btn-primary">Modifier</button>
@@ -74,9 +74,9 @@ $user = auth()->user();
             <form method="POST" action="/admin/supprimerregle">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <select class="form-select" aria-label="nomType" id="nomType" name="nomType" required="required">
-                        @foreach(DB::connection('mysql')->table('question_type')->get() as $type)
-                            <option value="{{$type->questionType}}">{{$type->questionType}}</option>
+                    <select class="form-select" aria-label="regle" id="regle" name="regle" required="required">
+                        @foreach(DB::connection('mysql')->table('regles')->get() as $regle)
+                            <option value="{{$regle->id}}">{{$regle->regle}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -85,89 +85,6 @@ $user = auth()->user();
                 </div>
             </form>
         </div>
-        <br>
-        <h2>Modifier les questions</h2>
-    <p>
-        <a class="btn btn-success" data-bs-toggle="collapse" href="#ajouterQuestion" role="button" aria-expanded="false" aria-controls="ajouterQuestion">
-            Ajouter une question
-        </a>
-        <a class="btn btn-danger" data-bs-toggle="collapse" href="#supprimerQuestion" role="button" aria-expanded="false" aria-controls="supprimerQuestion">
-            Supprimer une question
-        </a>
-    </p>
-        <div class="collapse" id="ajouterQuestion">
-            <form method="POST" action="/admin/ajouterquestion">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="image">Image de la question (URL):</label>
-                    <input type="text" class="form-control" id="image" name="image" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="question">Question entière:</label>
-                    <input type="text" class="form-control" id="question" name="question" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="reponse">Réponse 1 (bonne réponse):</label>
-                    <input type="text" class="form-control" id="reponse" name="reponse" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="reponse2">Réponse 2 (fausse réponse):</label>
-                    <input type="text" class="form-control" id="reponse2" name="reponse2" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="reponse3">Réponse 3 (fausse réponse):</label>
-                    <input type="text" class="form-control" id="reponse3" name="reponse3" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="reponse4">Réponse 4 (fausse réponse):</label>
-                    <input type="text" class="form-control" id="reponse4" name="reponse4" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="indice">Indice:</label>
-                    <input type="text" class="form-control" id="indice" name="indice" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="explication">Explication:</label>
-                    <input type="text" class="form-control" id="explication" name="explication" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="questionType">Question type:</label>
-                    <select class="form-select" aria-label="questionType" id="questionType" name="questionType" required="required">
-                        @foreach(DB::connection('mysql')->table('question_type')->get() as $type)
-                            <option value="{{$type->questionType}}">{{$type->questionType}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="questionLevel">Difficulté:</label>
-                    <select class="form-select" aria-label="questionLevel" id="questionLevel" name="questionLevel" required="required">
-                        <option value="Facile">Facile</option>
-                        <option value="Moyenne">Moyenne</option>
-                        <option value="Difficile">Difficile</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button style="cursor:pointer" type="submit" class="btn btn-success">Ajouter</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="collapse" id="supprimerQuestion">
-        <form method="POST" action="/admin/supprimerquestion">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label for="question">Question:</label>
-                <select class="form-select" aria-label="question" id="question" name="question" required="required">
-                    @foreach(DB::connection('mysql')->table('question')->get() as $type)
-                        <option value="{{$type->id}}">{{$type->question}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <button style="cursor:pointer" type="submit" class="btn btn-danger">Supprimer</button>
-            </div>
-        </form>
-    </div>
 </div>
 @else
 @php

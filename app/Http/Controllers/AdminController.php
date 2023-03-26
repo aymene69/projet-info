@@ -87,7 +87,7 @@ class AdminController extends Controller
     public function ajouterregle()
     {
         $data = request(['regle']);
-        DB::table('regle')->insert([
+        DB::table('regles')->insert([
             'regle' => $data['regle']
         ]);
 
@@ -97,7 +97,7 @@ class AdminController extends Controller
     public function modifregle()
     {
         $data = request(['regle', 'nouvelleRegle']);
-        DB::table('regle')->where('id', $data['regle'])->update([
+        DB::table('regles')->where('id', $data['regle'])->update([
             'regle' => $data['nouvelleRegle']
         ]);
 
@@ -107,7 +107,7 @@ class AdminController extends Controller
     public function supprimerregle()
     {
         $data = request(['regle']);
-        DB::table('regle')->where('id', $data['regle'])->delete();
+        DB::table('regles')->where('id', $data['regle'])->delete();
 
         return redirect()->route('editregles');
     }
