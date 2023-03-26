@@ -96,11 +96,11 @@ $user = auth()->user();
         </a>
     </p>
         <div class="collapse" id="ajouterQuestion">
-            <form method="POST" action="/admin/ajouterquestion">
+            <form method="POST" action="/admin/ajouterquestion" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="image">Image de la question (URL):</label>
-                    <input type="text" class="form-control" id="image" name="image" required="required">
+                    <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg" required="required">
                 </div>
                 <div class="form-group">
                     <label for="question">Question entière:</label>

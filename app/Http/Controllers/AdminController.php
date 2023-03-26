@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use Termwind\Components\Dd;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AdminController extends Controller
 {
@@ -57,9 +59,11 @@ class AdminController extends Controller
         return redirect()->route('editquestions');
     }
 
-    public function ajouterquestion()
+    public function ajouterquestion(Request $request)
     {
         $data = request(['question', 'reponse', 'reponse2', 'reponse3', 'reponse4', 'indice', 'explication', 'questionType', 'questionLevel', 'questionImage', 'image']);
+        $fileName = time().'.'.$data['image']->extension();
+        $request->file->move(public_path('uploads'), $fileName);
         DB::table('question')->insert([
             'question' => $data['question'],
             'reponse' => $data['reponse'],
@@ -70,7 +74,7 @@ class AdminController extends Controller
             'explication' => $data['explication'],
             'questionType' => $data['questionType'],
             'questionLevel' => $data['questionLevel'],
-            'questionImage' => $data['image']
+            'questionImage' => $fileName
         ]);
 
         return redirect()->route('editquestions');
