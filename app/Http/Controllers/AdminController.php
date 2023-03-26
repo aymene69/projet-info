@@ -47,7 +47,9 @@ class AdminController extends Controller
         DB::table('question_type')->where('questionType', $data['nomType'])->update([
             'questionType' => $data['nouveauNomType']
         ]);
-
+        DB::table('question')->where('questionType', $data['nomType'])->update([
+            'questionType' => $data['nouveauNomType']
+        ]);
         return redirect()->route('editquestions');
     }
 
@@ -55,16 +57,15 @@ class AdminController extends Controller
     {
         $data = request(['nomType']);
         DB::table('question_type')->where('questionType', $data['nomType'])->delete();
-
+        DB::table('question')->where('questionType', $data['nomType'])->delete();
         return redirect()->route('editquestions');
     }
 
-    public function ajouterquestion(Request $request)
+    public function ajouterquestion()
     {
         $data = request(['question', 'reponse', 'reponse2', 'reponse3', 'reponse4', 'indice', 'explication', 'questionType', 'questionLevel', 'questionImage', 'image']);
-        dd($request->file->extension());
-        $fileName = time().'.'.$request->files->extension();
-        $data['image']->file->move(public_path('uploads'), $fileName);
+        $fileName = time().'.'.$data['image']->extension();
+        $data['image']->move(public_path('uploads'), $fileName);;
         DB::table('question')->insert([
             'question' => $data['question'],
             'reponse' => $data['reponse'],

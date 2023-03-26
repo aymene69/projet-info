@@ -39,9 +39,15 @@ $types = DB::connection('mysql')->table('question_type')->get();
             <thead>
                 <tr>
                 <th scope="col">ID question</th>
+                <th scope="col">Image</th>
                 <th scope="col">Question</th>
                 <th scope="col">Réponse</th>
+                <th scope="col">Réponse 2</th>
+                <th scope="col">Réponse 3</th>
+                <th scope="col">Réponse 4</th>
                 <th scope="col">Indice</th>
+                <th scope="col">Explication</th>
+                <th scope="col">Type</th>
                 <th scope="col">Difficulté</th>
                 </tr>
             </thead>
@@ -49,9 +55,15 @@ $types = DB::connection('mysql')->table('question_type')->get();
                 @foreach (DB::connection('mysql')->table('question')->where('questionType', $type->questionType)->get() as $question)
                 <tr>
                     <th scope="row">{{$question->id}}</th>
+                    <td><img src="/uploads/{{$question->questionImage}}" width=100></td>
                     <td>{{$question->question}}</td>
                     <td>{{$question->reponse}}</td>
+                    <td>{{$question->reponse2}}</td>
+                    <td>{{$question->reponse3}}</td>
+                    <td>{{$question->reponse4}}</td>
                     <td>{{$question->indice}}</td>
+                    <td>{{$question->explication}}</td>
+                    <td>{{$question->questionType}}</td>
                     <td>{{$question->questionLevel}}</td>
                 </tr>
                 @endforeach
