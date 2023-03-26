@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -43,3 +44,10 @@ Route::post('/admin/supprimerquestion', [AdminController::class, 'supprimerquest
 Route::post('/admin/ajouterregle', [AdminController::class, 'ajouterregle'])->name('ajouterregle');
 Route::post('/admin/modifregle', [AdminController::class, 'modifregle'])->name('modifregle');
 Route::post('/admin/supprimerregle', [AdminController::class, 'supprimerregle'])->name('supprimerregle');
+
+Route::get('/profile/{id}', [ProfileController::class, 'viewprofile'])->name('viewprofile');
+
+Route::post('/profile/modifavatar', [ProfileController::class, 'modifavatar'])->name('modifavatar');
+Route::post('/profile/modifusername', [ProfileController::class, 'modifusername'])->name('modifusername');
+Route::post('/profile/modifemail', [ProfileController::class, 'modifemail'])->name('modifemail');
+Route::post('/profile/modifpassword', [ProfileController::class, 'modifpassword'])->name('modifpassword');
