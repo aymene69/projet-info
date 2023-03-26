@@ -1,6 +1,5 @@
 <?php
 $user = auth()->user();
-$types = DB::connection('mysql')->table('question_type')->get();
 ?>
 @include('layouts.header')
 @if($user!=null)

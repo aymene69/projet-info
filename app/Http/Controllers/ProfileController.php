@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function viewprofile(string $id) {
         $user = auth()->user();
         if ($user == null) {
-            return redirect()->route('login');
+            return view('profile.other', ['id' => $id]);
         }
         else {
             if ($user->id == $id) {

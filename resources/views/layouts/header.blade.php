@@ -22,10 +22,13 @@ $user = auth()->user();
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('regles')}}">Règles</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('classement')}}">Classement</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     @if ($user)
-                    <p class="nav-link">Bonjour, {{ $user->prenom }}</p>
+                    <a class="nav-link" href="{{route('viewprofile', ['id' => $user->id])}}">Bonjour, {{ $user->prenom }}</a>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>
                     </li>

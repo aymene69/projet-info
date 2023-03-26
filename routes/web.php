@@ -5,6 +5,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReglesController;
+use App\Http\Controllers\ClassementController;
 
 
 /*
@@ -51,3 +53,7 @@ Route::post('/profile/modifavatar', [ProfileController::class, 'modifavatar'])->
 Route::post('/profile/modifusername', [ProfileController::class, 'modifusername'])->name('modifusername');
 Route::post('/profile/modifemail', [ProfileController::class, 'modifemail'])->name('modifemail');
 Route::post('/profile/modifpassword', [ProfileController::class, 'modifpassword'])->name('modifpassword');
+
+Route::get('/regles', [ReglesController::class, 'regles'])->name('regles');
+
+Route::get('/classement', [ClassementController::class, 'classement'])->name('classement');
