@@ -11,7 +11,7 @@ par:
 résumé par ceux qui écrivent
 
 ### Langages utilisés: 
-- PHP
+- PHP (incluant Blade)
 - SQL
 - HTML/CSS
 
