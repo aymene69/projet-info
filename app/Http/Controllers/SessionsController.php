@@ -15,7 +15,7 @@ class SessionsController extends Controller
     {
         if (auth()->attempt(request(['email', 'password'])) == false) {
             return view('connexion.create')->with([
-                'message' => 'The email or password is incorrect, please try again',
+                'message' => 'Les identifiants sont incorrects.',
                 'failed' => true,
             ]);
         }
