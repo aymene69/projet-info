@@ -25,7 +25,7 @@ $user = auth()->user();
     </div>
 
     <div class="nav" id="nav">
-        <a href="#"> <img src="https://i.ibb.co/x3Gnzp1/logo-AVCTXT.png"  class="logoIMG"/> </a>
+        <a href="#"> <img src="https://i.ibb.co/T0d76kQ/logo-AVCTXT.png" "  class="logoIMG"/> </a>
     </div>
 
 
