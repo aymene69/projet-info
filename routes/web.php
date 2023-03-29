@@ -57,3 +57,7 @@ Route::post('/profile/modifpassword', [ProfileController::class, 'modifpassword'
 Route::get('/regles', [ReglesController::class, 'regles'])->name('regles');
 
 Route::get('/classement', [ClassementController::class, 'classement'])->name('classement');
+
+Route::get('/catastrophes-naturelles', function () {return view('catastrophes');})->name('catastrophes-naturelles');
+
+Route::get('/eco-gestes', function () {return view('eco');})->name('eco-gestes');

@@ -12,8 +12,8 @@ $user = auth()->user();
 
     <div id="menu">
         <ul class="liste_menu">
-            <li><a href="#">Catastrophes naturelles</a></li>
-            <li><a href="#">Eco-gestes</a></li>
+            <li><a href="{{route('catastrophes-naturelles')}}">Catastrophes naturelles</a></li>
+            <li><a href="{{route('eco-gestes')}}">Eco-gestes</a></li>
             <li><a href="{{route('home')}}">Quizz</a></li>
         </ul>
 
@@ -27,7 +27,6 @@ $user = auth()->user();
     <div class="nav" id="nav">
         <a href="#"> <img src="https://i.ibb.co/T0d76kQ/logo-AVCTXT.png" class="logoIMG"/> </a>
     </div>
-    <a class="titreQ tailleTitre" href="{{route('home')}}">Quizz</a>
     <span>
         <a class="titreQ liens-quizz" href="{{route('home')}}">Accueil</a>
         <a class="titreQ liens-quizz" href="{{route('regles')}}">Règles</a>
