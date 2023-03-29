@@ -10,7 +10,7 @@ $data = json_decode($response);
         <div class="col">
             <h3>Séismes</h3>
             @foreach($data->features as $seisme)
-            <div class="card">
+            <div class="card" style="z-index: -1;">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Séisme vers {{$seisme->properties->flynn_region}}</h5>
                     <table class="table table-striped">

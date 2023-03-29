@@ -28,7 +28,7 @@ $user = auth()->user();
     </div>
 
     <div class="nav" id="nav">
-        <a href="#"> <img src="https://i.ibb.co/T0d76kQ/logo-AVCTXT.png" class="logoIMG"/> </a>
+        <a href="{{route('home')}}"> <img src="https://i.ibb.co/T0d76kQ/logo-AVCTXT.png" class="logoIMG"/> </a>
     </div>
     <span>
         <a class="titreQ liens-quizz" href="{{route('home')}}">Accueil</a>
