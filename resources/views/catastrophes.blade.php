@@ -1,8 +1,8 @@
 <?php
 $response = file_get_contents("https://www.seismicportal.eu/fdsnws/event/1/query?limit=10&format=json&minmag=3");
 $data = json_decode($response);
-$tsunami = file_get_contents("https://www.tsunami.gov/events/xml/PAAQAtom.xml");
-$tsunami = simplexml_load_string($tsunami);
+$tsunami = file_get_contents("https://api.weather.gov/alerts/active?limit=50");
+$tsunami = json_decode($tsunami);
 dd($tsunami);
 ?>
 @include('layouts.header')
