@@ -15,37 +15,55 @@ $meteo = json_decode($meteo);
 ?>
 @include('layouts.header')
 <div class="container-fluid">
-    <h1>Catastrophes naturelles</h1>
+    <style>.card{        border-radius: 3px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 10px;        font-family: 'Montserrat', sans-serif;       }       .card-header{        text-align: center;        font-size: 20px;        font-weight: bold;       }        .card-body{          display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        }        .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }        .card-body-item-title{          font-weight: bold;        }        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }        .lien{          color: #3b3b3b;          text-decoration: none;        }</style>
+    <div class="tailleTitre titreQ">Catastrophes naturelles</div>
     <h3>Sont affichées ici les dernières catastrophes naturelles</h3>
     <div class="row align-items-start text-center">
         <div class="col">
             <h3>Séismes</h3>
             @foreach($data->features as $seisme)
-            <div class="card" style="z-index: -1;">
+            <div class="card" onload="coul_card({{$seisme->properties->mag}})">
+                <div class="card-header">
+                  Seisme vers {{$seisme->properties->flynn_region}}
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Séisme vers {{$seisme->properties->flynn_region}}</h5>
-                    <table class="table table-striped">
-                        <tr>
-                            <td><i class="fa-solid fa-signal"></i> Magnitude</td>
-                            <td>{{$seisme->properties->mag}} sur l'échelle de Richter</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-regular fa-solid fa-globe"></i> Profondeur</td>
-                            <td>{{$seisme->properties->depth}} km</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-location-dot"></i> Latitude</td>
-                            <td>{{$seisme->properties->lat}}</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-location-dot"></i> Longitude</td>
-                            <td>{{$seisme->properties->lon}}</td>
-                        </tr>
-                    </table>
-                    <a href="https://www.emsc-csem.org/Earthquake/earthquake.php?id={{$seisme->properties->source_id}}" class="btn btn-primary">Voir en détail</a>
+                  <div class="card-body-item" style="border-bottom: solid 2px #fff">
+                    <div class="card-body-item-title">
+                      <i class="fa-solid fa-signal"></i> Magnitude
+                    </div>
+                    <div class="card-body-item-value">
+                      {{$seisme->properties->mag}}
+                    </div>
+                  </div>
+                  <div class="card-body-item" style="border-bottom: solid 2px #fff">
+                    <div class="card-body-item-title">
+                      <i class="fa-regular fa-solid fa-globe"></i> Profondeur
+                    </div>
+                    <div class="card-body-item-value">
+                      {{$seisme->properties->depth}} km
+                    </div>
+                  </div>
+                  <div class="card-body-item" style="border-bottom: solid 2px #fff">
+                    <div class="card-body-item-title">
+                      <i class="fa-solid fa-location-dot"></i>Latitude
+                    </div>
+                    <div class="card-body-item-value">
+                      {{$seisme->properties->lat}}
+                    </div>
+                  </div>
+                  <div class="card-body-item">
+                    <div class="card-body-item-title">
+                      <i class="fa-solid fa-location-dot"></i>Longitude
+                    </div>
+                    <div class="card-body-item-value">
+                      {{$seisme->properties->lon}}
+                    </div>
+                  </div>
+                </div>
+                <div class="lienDetails">
+                    <a href="https://www.emsc-csem.org/Earthquake/earthquake.php?id={{$seisme->properties->source_id}}" class="lien"><i class="fa-solid fa-arrow-up-right-from-square" style="margin-right:10px;"></i>Voir plus de détails</a>
                 </div>
             </div>
-            <br>
             @endforeach
             <br>
         </div>
@@ -97,4 +115,8 @@ $meteo = json_decode($meteo);
         </div>
     </div>
 </div>
+<script>
+window.onload = function() {var cards = document.getElementsByClassName("card");for (var i = 0; i < cards.length; i++) {var magnitude = cards[i].getElementsByClassName("card-body-item-value")[0].innerHTML;coul_card(cards[i], magnitude);}}
+function coul_card(card, magnitude) {if (magnitude < 2) {card.style.backgroundColor = "#ffdddd";} else if (magnitude < 3) {card.style.backgroundColor = "#ffb4b4";} else if (magnitude < 4) {card.style.backgroundColor = "#ff7f7f";} else if (magnitude < 5) {card.style.backgroundColor = "#ff6060";} else if (magnitude < 7) {card.style.backgroundColor = "#ff3e3e";} else{card.style.backgroundColor = "#f00";}}
+</script>
 @include('layouts.footer')
