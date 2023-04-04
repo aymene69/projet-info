@@ -33,7 +33,11 @@ $user = auth()->user();
     <div class="nav" id="nav">
         <a href="{{route('home')}}"> <img src="https://i.ibb.co/T0d76kQ/logo-AVCTXT.png" class="logoIMG"/> </a>
     </div>
-
+    <span>
+        <a class="titreQ liens-quizz" href="{{route('home')}}">Accueil</a>
+        <a class="titreQ liens-quizz" href="{{route('regles')}}">Règles</a>
+        <a class="titreQ liens-quizz" href="{{route('classement')}}">Classement</a>
+    </span>
     <ul class="container-connex titreQ">
         @if ($user)
         <a class="item-connex" href="{{route('viewprofile', ['id' => $user->id])}}">Bonjour, {{ $user->prenom }}</a>
