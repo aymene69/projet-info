@@ -24,7 +24,7 @@ $meteo = json_decode($meteo);
             @foreach($data->features as $seisme)
             <div class="card" onload="coul_card({{$seisme->properties->mag}})">
                 <div class="card-header">
-                  Seisme vers {{$seisme->properties->flynn_region}}
+                  Séisme vers {{$seisme->properties->flynn_region}}
                 </div>
                 <div class="card-body">
                   <div class="card-body-item" style="border-bottom: solid 2px #fff">
