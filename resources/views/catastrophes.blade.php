@@ -17,7 +17,7 @@ $meteo = json_decode($meteo);
 <div class="container-fluid">
     <style>.card{        border-radius: 3px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 10px;        font-family: 'Montserrat', sans-serif;       }       .card-header{        text-align: center;        font-size: 20px;        font-weight: bold;       }        .card-body{          display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        }        .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }        .card-body-item-title{          font-weight: bold;        }        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }        .lien{          color: #3b3b3b;          text-decoration: none;        }</style>
     <div class="tailleTitre titreQ">Catastrophes naturelles</div>
-    <h4>Sont affichées ici les dernières catastrophes naturelles. Elles sont mises à jour automatiquement..</h4>
+    <h4>Sont affichées ici les dernières catastrophes naturelles. Elles sont mises à jour automatiquement.</h4>
     <div class="row align-items-start text-center">
         <div class="col">
             <h3>Séismes</h3>
