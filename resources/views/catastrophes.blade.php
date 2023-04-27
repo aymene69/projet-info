@@ -15,16 +15,16 @@ $meteo = json_decode($meteo);
 ?>
 @include('layouts.header')
 <div class="container-fluid">
-    <style>.card{        border-radius: 3px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 10px;        font-family: 'Montserrat', sans-serif;       }       .card-header{        text-align: center;        font-size: 20px;        font-weight: bold;       }        .card-body{          display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        }        .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }        .card-body-item-title{          font-weight: bold;        }        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }        .lien{          color: #3b3b3b;          text-decoration: none;        }</style>
-    <div class="tailleTitre titreQ">Catastrophes naturelles</div>
-    <h3>Sont affichées ici les dernières catastrophes naturelles</h3>
+    <style>.card_meteo{ background-color: #626dff;       border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       } .card_seisme{        border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       }       .card-header{        text-align: center;        font-size: 20px;        font-weight: bold;       }        .card-body{          display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        }.card-body-item-value{margin-right:10px;}        .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }        .card-body-item-title{          font-weight: bold;        margin-left:10px;}        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }        .lien{          color: #3b3b3b;          text-decoration: none;        }</style>
+    <div class="tailleTitre titreQ" style="font-weight:bold;">Catastrophes naturelles</div>
+    <div style="font-family: 'Montserrat', sans-serif;  text-align:center; opacity:0.7; font-size:1.1em; font-weight:600;">Dernière mise à jour :<span id="date" style="margin-left:5px"></span></div>
     <div class="row align-items-start text-center">
         <div class="col">
-            <h3>Séismes</h3>
+            <h3 style="font-family: 'Montserrat', sans-serif;">Séismes</h3>
             @foreach($data->features as $seisme)
-            <div class="card" onload="coul_card({{$seisme->properties->mag}})">
+            <div class="card_seisme" onload="coul_card({{$seisme->properties->mag}})">
                 <div class="card-header">
-                  Seisme vers {{$seisme->properties->flynn_region}}
+                  Séisme vers {{$seisme->properties->flynn_region}}
                 </div>
                 <div class="card-body">
                   <div class="card-body-item" style="border-bottom: solid 2px #fff">
@@ -45,7 +45,7 @@ $meteo = json_decode($meteo);
                   </div>
                   <div class="card-body-item" style="border-bottom: solid 2px #fff">
                     <div class="card-body-item-title">
-                      <i class="fa-solid fa-location-dot"></i>Latitude
+                      <i class="fa-solid fa-location-dot" style="margin-right:3px"></i>Latitude
                     </div>
                     <div class="card-body-item-value">
                       {{$seisme->properties->lat}}
@@ -53,7 +53,7 @@ $meteo = json_decode($meteo);
                   </div>
                   <div class="card-body-item">
                     <div class="card-body-item-title">
-                      <i class="fa-solid fa-location-dot"></i>Longitude
+                      <i class="fa-solid fa-location-dot" style="margin-right:3px"></i>Longitude
                     </div>
                     <div class="card-body-item-value">
                       {{$seisme->properties->lon}}
@@ -68,41 +68,60 @@ $meteo = json_decode($meteo);
             <br>
         </div>
         <div class="col">
-        <h3>Dernières alertes météo (US)</h3>
+        <h3 style="font-family: 'Montserrat', sans-serif;">Dernières alertes météo (US)</h3>
             @php
             $i=0;
             @endphp
             @foreach($meteo->features as $info)
             @if($info->properties->severity=="Severe")
             @if(substr($info->properties->effective, 0, 10)==date("Y-m-d"))
-            <div class="card" style="z-index: -1;">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Alerte vers {{$info->properties->areaDesc}}</h5>
-                    <table class="table table-striped">
-                        <tr>
-                            <td><i class="fa-solid fa-arrow-right"></i> Type d'alerte</td>
-                            <td>{{$info->properties->event}}</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-signal"></i> Gravité</td>
-                            <td>{{$info->properties->severity}}</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-sharp fa-solid fa-clover"></i> Certitude</td>
-                            <td>{{$info->properties->certainty}}</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-calendar-days"></i> Début</td>
-                            <td>{{substr($info->properties->effective, 0, 10)}} à {{substr($info->properties->effective, 11, -9)}}</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-calendar-days"></i> Fin</td>
-                            <td>{{substr($info->properties->expires, 0, 10)}} à {{substr($info->properties->expires, 11, -9)}}</td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="card_meteo">
+        <div class="card-header">
+          <i class="fa-solid fa-triangle-exclamation"></i> Alerte vers {{$info->properties->areaDesc}}
+        </div>
+        <div class="card-body">
+          <div class="card-body-item" style="border-bottom: solid 2px #fff">
+            <div class="card-body-item-title">
+              <i class="fa-solid fa-arrow-right"></i> Type d'alerte
             </div>
-            <br>
+            <div class="card-body-item-value">
+              {{$info->properties->event}}
+            </div>
+          </div>
+          <div class="card-body-item" style="border-bottom: solid 2px #fff">
+            <div class="card-body-item-title">
+              <i class="fa-solid fa-signal"></i> Gravité
+            </div>
+            <div class="card-body-item-value">
+              {{$info->properties->severity}}
+            </div>
+          </div>
+          <div class="card-body-item" style="border-bottom: solid 2px #fff">
+            <div class="card-body-item-title">
+              <i class="fa-sharp fa-solid fa-clover"></i> Certitude
+            </div>
+            <div class="card-body-item-value">
+              {{$info->properties->certainty}}
+            </div>
+          </div>
+          <div class="card-body-item" style="border-bottom: solid 2px #fff">
+            <div class="card-body-item-title">
+              <i class="fa-solid fa-calendar-days"></i> Début
+            </div>
+            <div class="card-body-item-value">
+              {{substr($info->properties->effective, 0, 10)}} à {{substr($info->properties->effective, 11, -9)}}
+            </div>
+          </div>
+          <div class="card-body-item">
+            <div class="card-body-item-title">
+              <i class="fa-solid fa-calendar-days"></i> Fin
+            </div>
+            <div class="card-body-item-value">
+              {{substr($info->properties->expires, 0, 10)}} à {{substr($info->properties->expires, 11, -9)}}
+            </div>
+          </div>
+        </div>
+        </div>
             @endif
             @endif
             @php
@@ -116,7 +135,11 @@ $meteo = json_decode($meteo);
     </div>
 </div>
 <script>
-window.onload = function() {var cards = document.getElementsByClassName("card");for (var i = 0; i < cards.length; i++) {var magnitude = cards[i].getElementsByClassName("card-body-item-value")[0].innerHTML;coul_card(cards[i], magnitude);}}
+let currDate = new Date();
+let hoursMin = currDate.getHours() + 'h' + currDate.getMinutes();
+document.getElementById('date').innerHTML=  hoursMin;
+
+window.onload = function() {var cards = document.getElementsByClassName("card_seisme");for (var i = 0; i < cards.length; i++) {var magnitude = cards[i].getElementsByClassName("card-body-item-value")[0].innerHTML;coul_card(cards[i], magnitude);}}
 function coul_card(card, magnitude) {if (magnitude < 2) {card.style.backgroundColor = "#ffdddd";} else if (magnitude < 3) {card.style.backgroundColor = "#ffb4b4";} else if (magnitude < 4) {card.style.backgroundColor = "#ff7f7f";} else if (magnitude < 5) {card.style.backgroundColor = "#ff6060";} else if (magnitude < 7) {card.style.backgroundColor = "#ff3e3e";} else{card.style.backgroundColor = "#f00";}}
 </script>
 @include('layouts.footer')
