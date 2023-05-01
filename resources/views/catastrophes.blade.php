@@ -15,12 +15,27 @@ $meteo = json_decode($meteo);
 ?>
 @include('layouts.header')
 <div class="container-fluid">
-    <style>.card_meteo{ background-color: #626dff;       border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       } .card_seisme{        border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       }       .card-header{        text-align: center;        font-size: 20px;        font-weight: bold;       }        .card-body{          display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        }.card-body-item-value{margin-right:10px;}        .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }        .card-body-item-title{          font-weight: bold;        margin-left:10px;}        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }        .lien{          color: #3b3b3b;          text-decoration: none;        }</style>
-    <div class="tailleTitre titreQ" style="font-weight:bold;">Catastrophes naturelles</div>
-    <div style="font-family: 'Montserrat', sans-serif;  text-align:center; opacity:0.7; font-size:1.1em; font-weight:600;">Dernière mise à jour :<span id="date" style="margin-left:5px"></span></div>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans&family=Poppins&family=Raleway&display=swap');
+    .lienC{
+        color: white;
+    }
+    .card_meteo{ background-color: #467DCF;       border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       }
+    .card_seisme{        border-radius: 5px;        box-shadow: 0 0 10px rgba(0,0,0,0.2);        margin-top: 20px;        font-family: 'Montserrat', sans-serif;       }
+    .card-header{        text-align: center;        font-size: 20px;               color:#fff; font-family: 'Nunito Sans', sans-serif;}
+    .card-body{          font-family: 'Raleway', sans-serif; display: flex;          flex-direction: column;          background-color: rgb(236, 236, 236);        color:#1e1e1e !important;}
+    .card-body-item-value{margin-right:10px;}
+    .card-body-item{          display: flex;          justify-content: space-between;          align-items: center;          font-size: 18px;          padding-top: 5px;          padding-bottom: 5px;        }
+    .card-body-item-title{          font-weight: bold;        margin-left:10px;}        .lienDetails{          text-align: center;          font-size: 18px;     margin:3px        }
+    .lien{          color: #fff;          text-decoration: none;        }
+    </style>
+
+    <div style="font-weight:bold; font-family: 'Poppins', sans-serif; text-align: center; font-size:2em; padding-top:3vh">Catastrophes naturelles</div>
+    <div style="font-family: 'Montserrat', sans-serif;  text-align:center; opacity:0.7; font-size:1.1em; font-weight:600;padding-bottom:2vh">Dernière mise à jour :<span id="date" style="margin-left:5px"></span></div>
     <div class="row align-items-start text-center">
         <div class="col">
             <h3 style="font-family: 'Montserrat', sans-serif;">Séismes</h3>
+
             @foreach($data->features as $seisme)
             <div class="card_seisme" onload="coul_card({{$seisme->properties->mag}})">
                 <div class="card-header">
@@ -140,6 +155,6 @@ let hoursMin = currDate.getHours() + 'h' + currDate.getMinutes();
 document.getElementById('date').innerHTML=  hoursMin;
 
 window.onload = function() {var cards = document.getElementsByClassName("card_seisme");for (var i = 0; i < cards.length; i++) {var magnitude = cards[i].getElementsByClassName("card-body-item-value")[0].innerHTML;coul_card(cards[i], magnitude);}}
-function coul_card(card, magnitude) {if (magnitude < 2) {card.style.backgroundColor = "#ffdddd";} else if (magnitude < 3) {card.style.backgroundColor = "#ffb4b4";} else if (magnitude < 4) {card.style.backgroundColor = "#ff7f7f";} else if (magnitude < 5) {card.style.backgroundColor = "#ff6060";} else if (magnitude < 7) {card.style.backgroundColor = "#ff3e3e";} else{card.style.backgroundColor = "#f00";}}
+function coul_card(card, magnitude) {if (magnitude < 2) {card.style.backgroundColor = "#DCD0BE";} else if (magnitude < 3) {card.style.backgroundColor = "#AA9474";} else if (magnitude < 4) {card.style.backgroundColor = "#907C5E";} else if (magnitude < 5) {card.style.backgroundColor = "#726147";} else if (magnitude < 7) {card.style.backgroundColor = "#453A2A";} else{card.style.backgroundColor = "black";}}
 </script>
 @include('layouts.footer')

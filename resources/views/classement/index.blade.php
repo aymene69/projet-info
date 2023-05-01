@@ -1,7 +1,12 @@
 @include('layouts.header')
+<style>
+.lienQ{
+    color: white;
+}
+</style>
 <div class="container-fluid">
     <h2>Classement</h2>
-    <table class="table">
+    <table class="table" style="border: #1e1e1e !important">
         <tr>
             <th>Position</th>
             <th>Nom d'utilisateur</th>
