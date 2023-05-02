@@ -1,12 +1,14 @@
 @include('layouts.header')
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Nunito+Sans&family=Poppins&family=Raleway&display=swap');
+
         .lienQ{
             color: white;
         }
     </style>
-    <div style="width: 60vw; margin:0 auto; display:flex; align-items:center; justify-content:center;">
-        <a style="font-weight:bold; color: #1e1e1e; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.33; text-align:center" href="{{route('home')}}">Accueil</a>
-        <a style="color: #1e1e1e; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.34; text-align:center" href="{{route('regles')}}">Règles</a>
-        <a style="color: #1e1e1e; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.33; text-align:center" href="{{route('classement')}}">Classement</a>
+    <div class="quizT">
+        <a class="quizT-items" style="font-weight:bold;" href="{{route('home')}}"><i class="fa-solid fa-compass"></i> Accueil</a>
+        <a class="quizT-items" href="{{route('regles')}}"><i class="fa-brands fa-leanpub"></i> Règles</a>
+        <a class="quizT-items" href="{{route('classement')}}"><i class="fa-solid fa-ranking-star"></i> Classement</a>
     </div>
 @include('layouts.footer')
