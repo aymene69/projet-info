@@ -15,10 +15,10 @@ $user = auth()->user();
             *::-webkit-scrollbar {  width: 16px;}
             *::-webkit-scrollbar-track {  background: #ffffff00;}
             *::-webkit-scrollbar-thumb {  background-color: #1eff0000;  border-radius: 10px;  border: 3px solid #ffffff00;}
-
+            @import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Nunito+Sans&family=Poppins&family=Raleway&display=swap');
             body{
                 margin :0;
-                background : #F8DFA9;
+                background : #D9D9D9;
                 overflow: overlay;
             }
             nav{
@@ -29,22 +29,24 @@ $user = auth()->user();
                 display: flex;
                 align-items: center;
                 gap:10px;
+                border-bottom:2px solid #FFC700;
             }
             .logoL{
                 height : 49px;
                 width: 148px;
             }
             .lienC, .lienE, .lienQ{
-                color: #F5F1D5;
+                color: #D0BEA1;
             }
             .lienC, .lienE, .lienQ, .lienN{
                 margin: 18px;
                 text-decoration: none;
                 z-index:2;
                 font-size: 1.3em;
+                font-family: 'Raleway', sans-serif;
             }
             .lienU{
-                color: #FFF;
+                color: #D0BEA1;
                 width: 100%;
                 text-align: center;
             }
@@ -143,13 +145,21 @@ $user = auth()->user();
                 text-decoration : none;
                 width:100%;
                 padding: 5px;
-                color: #467DCF;
+                color: #D0BEA1;
             }
 
             .lienQSE:hover{
-                color: #0066FF;
+                color: #FFC700;
             }
-
+            .quizT{
+                width: 50vw; display:flex; align-items:center; justify-content:center;margin-top:0.5vh;
+            }
+            .quizT-items{
+                font-family: 'Raleway', sans-serif; color: #868686; font-weight:bold; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.33; text-align:center
+            }
+            .quizT-items:hover{
+                color: #5F5F5F;
+            }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </head>

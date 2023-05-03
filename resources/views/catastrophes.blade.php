@@ -16,7 +16,8 @@ $meteo = json_decode($meteo);
 @include('layouts.header')
 <div class="container-fluid">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans&family=Poppins&family=Raleway&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Nunito+Sans&family=Poppins&family=Raleway&display=swap');
+
     .lienC{
         color: white;
     }
@@ -94,7 +95,7 @@ $meteo = json_decode($meteo);
         <div class="card-header">
           <i class="fa-solid fa-triangle-exclamation"></i> Alerte vers {{$info->properties->areaDesc}}
         </div>
-        <div class="card-body">
+        <div class="card-body" style="border-radius:0px 0px 5px 5px;">
           <div class="card-body-item" style="border-bottom: solid 2px #fff">
             <div class="card-body-item-title">
               <i class="fa-solid fa-arrow-right"></i> Type d'alerte
