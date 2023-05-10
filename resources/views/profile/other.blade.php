@@ -3,10 +3,10 @@ $user = DB::table('users')->where('id', $id)->first();
 ?>
 @include('layouts.header')
 <div class="container-fluid">
-    <h2>Profil de {{$user->username}}</h2>
-    <div class="card" style="width: 18rem;">
+    <h2 style="text-align:center; margin:10px;">Profil de {{$user->username}}</h2>
+    <div class="card" style="width: 50vw; margin: 0 auto; z-index: -1">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><img src="/avatar/{{ $user->avatar }}" width=50></li>
+            <li class="list-group-item" style="margin: 0 auto;  border: none"><img src="/avatar/{{ $user->avatar }}" width=80 style="margin: 0 auto; border-radius:5px;"></li>
             <li class="list-group-item">Nom d'utilisateur: {{ $user->username }}</li>
             <li class="list-group-item">Prénom: {{ $user->prenom }}</li>
             <li class="list-group-item">Score: {{ $user->score }}</li>

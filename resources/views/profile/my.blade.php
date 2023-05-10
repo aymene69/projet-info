@@ -5,11 +5,11 @@ $user = auth()->user();
 @if($user!=null)
 @if($user->id==$id)
 <div class="container-fluid">
-    <h2>Mon profil</h2>
-    <div class="card" style="width: 18rem;">
+    <h2  style="text-align:center; margin:10px;">Mon profil</h2>
+    <div class="card" style="width: 50vw; margin: 0 auto; z-index: -1">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Mes informations</b></li>
-            <li class="list-group-item"><img src="/avatar/{{ $user->avatar }}" width=50><br><a class="btn btn-primary" data-bs-toggle="collapse" href="#modifAvatar" role="button" aria-expanded="false" aria-controls="modifAvatar">Modifier</a>
+            <li class="list-group-item" ><b>Mes informations</b></li>
+            <li class="list-group-item" style="margin: 0 auto;  border: none"><img src="/avatar/{{ $user->avatar }}" width=80 style="margin: 0 auto; border-radius:5px;"><br><a class="btn btn-primary" data-bs-toggle="collapse" href="#modifAvatar" role="button" aria-expanded="false" aria-controls="modifAvatar">Modifier</a>
             <div class="collapse" id="modifAvatar">
                 <form method="POST" action="/profile/modifavatar" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -75,8 +75,6 @@ $user = auth()->user();
                 ({{$user->nbVictoires/$user->nbDefaites}})
                 @endif
             </li>
-            <li class="list-group-item">Nombre d'indices: {{ $user->nbIndices }}</li>
-            <li class="list-group-item">Nombre d'indices utilisés: {{ $user->nbIndicesUtilises }}</li>
 
         </ul>
     </div>

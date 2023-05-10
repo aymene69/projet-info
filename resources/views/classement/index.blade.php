@@ -7,9 +7,10 @@
         }
     </style>
     <div class="quizT">
-        <a class="quizT-items" href="{{route('home')}}"><i class="fa-solid fa-compass"></i> Accueil</a>
+        <a class="quizT-items" style="font-weight:bold;" href="{{route('home')}}"><i class="fa-solid fa-compass"></i> Accueil</a>
         <a class="quizT-items" href="{{route('regles')}}"><i class="fa-brands fa-leanpub"></i> Règles</a>
-        <a class="quizT-items" style="font-weight:bold;" href="{{route('classement')}}"><i class="fa-solid fa-ranking-star"></i> Classement</a>
+        <a class="quizT-items" href="{{route('classement')}}"><i class="fa-solid fa-ranking-star"></i> Classement</a>
+        <a class="quizT-items" href="{{route('jouer')}}"><i class="fa-solid fa-gamepad"></i> Jouer</a>
     </div>
     <table class="table" style=" font-family: 'Montserrat', sans-serif; color: #1e1e1e; background-color: #e1e1e1; opacity:0.75; border: #888888 2px solid !important; margin:1vw; width: 98vw; text-align: center;">
         <tr>

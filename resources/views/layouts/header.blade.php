@@ -30,6 +30,7 @@ $user = auth()->user();
                 align-items: center;
                 gap:10px;
                 border-bottom:2px solid #FFC700;
+                flex-wrap: nowrap;
             }
             .logoL{
                 height : 49px;
@@ -44,6 +45,11 @@ $user = auth()->user();
                 z-index:2;
                 font-size: 1.3em;
                 font-family: 'Raleway', sans-serif;
+            }
+            @media screen and (width<900px) {
+                .lienC, .lienE, .lienQ, .lienN{
+                font-size: 1em;
+                }
             }
             .lienU{
                 color: #D0BEA1;
@@ -152,10 +158,10 @@ $user = auth()->user();
                 color: #FFC700;
             }
             .quizT{
-                width: 50vw; display:flex; align-items:center; justify-content:center;margin-top:0.5vh;
+                width: 70vw; display:flex; align-items:center; justify-content:center;margin-top:0.5vh;
             }
             .quizT-items{
-                font-family: 'Raleway', sans-serif; color: #868686; font-weight:bold; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.33; text-align:center
+                font-family: 'Raleway', sans-serif; color: #868686; font-weight:bold; text-decoration: none; font-size: 1.25em; margin-left: 8px; flex: 0.25; text-align:center
             }
             .quizT-items:hover{
                 color: #5F5F5F;
@@ -168,12 +174,13 @@ $user = auth()->user();
     <nav id="nav">
         <a href="{{route('home')}}" style="flex: 0.1;"> <img src="https://i.ibb.co/4PjzC5z/logo-info-marron.png" class="logoL"/> </a>
 
-        <span style="flex: 0.7;">
+        <span style="flex: 0.7; display:flex; flex-wrap:nowrap;">
             <a class="lienQ lienN" id="menuQ" href="{{route('home')}}">Quizz</a>
             <span id="menu-deroulant-Q">
                 <a class="lienQSE" href="{{route('home')}}">Accueil</a>
                 <a class="lienQSE" href="{{route('regles')}}">Règles</a>
                 <a class="lienQSE" href="{{route('classement')}}">Classement</a>
+                <a class="lienQSE" href="{{route('jouer')}}">Jouer</a>
             </span>
             <a class="lienC lienN" href="{{route('catastrophes-naturelles')}}">Catastrophes naturelles</a>
             <a class="lienE lienN" href="{{route('eco-gestes')}}">Eco-gestes</a>

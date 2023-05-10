@@ -42,7 +42,7 @@
             font-family: 'Montserrat', sans-serif;
         }
     </style>
-    <div style="display: flex;">
+    <div style="display: flex; background-color:#1e1e1e; height:100vh; color: #fff;">
         <div class="container-eco" style="flex:0.6;">
             <h1 class="titre-eco">Le tri</h1>
             <div class="pavé">Il est important de notifier que les petits gestes du quotidien combinés peuvent avoir un impactsignificatif sur l’environnement. On peut tous contribuer pour protéger notre planète et ainsipréserver les ressources naturelles pour les générations futures.Le tri selectif est simple mais tellement important pour s’y faire il suffit retenir 4 règles.<br> Règle n°1 : tous emballages en carton, papier, acier, aluminium et briques alimentaires vontdans un bac de tri pour être recyclés<br> Règle n°2 : les emballages en plastiques (bouteilles et flacons) vont aussi dans ce bac de tri<br> Règle n°3 : les bouteilles, pots et bocaux vont eux dans un conteneur en verre.<br> Règle n°4 : la vaisselle et la porcelaine ne se recyclent pas.</div>
@@ -73,4 +73,3 @@
 
         }
     </script>
-@include('layouts.footer')
