@@ -1,6 +1,5 @@
 <?php
 $user = auth()->user();
-dd($user);
 session_start();
 ?>
 @if($user!=null)

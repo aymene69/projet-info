@@ -27,6 +27,9 @@ class JouerController extends Controller
     }
 
     public function index() {
+        session()->forget('idQuestions');
+        session()->forget('reponsesFull');
+        session()->forget('nbPoints');
         return view('jouer.index');
     }
 
@@ -35,8 +38,8 @@ class JouerController extends Controller
         session()->push('reponsesFull', $data['reponse']);
         $question = DB::table('question')->where('id', $data['id'])->first();
         if ($question->reponse == $data['reponse']) {
-            $points = session('idQuestions') +1
-            session()->put('nbPoints', $points)
+            $points = session('nbPoints') +1;
+            session()->put('nbPoints', $points);
             $user = User::find(auth()->user()->id);
             if ($data['difficulte'] == "Facile") {
                 $user->score = $user->score + 1;
@@ -51,15 +54,36 @@ class JouerController extends Controller
             if ($data['round'] == 10) {
                 $user = User::find(auth()->user()->id);
                 $user->nbParties = $user->nbParties +1;
-                
-                return redirect()->route('reponses', ['idQuestions' => session('idQuestions'), 'reponsesFull' => session('reponsesFull')]);
+                if (session('nbPoints') > 5) {
+                    $user->nbVictoires = $user->nbVictoires +1;
+                    $user->save();
+                }
+                else {
+                    $user->nbDefaites = $user->nbDefaites +1;
+                    $user->save();
+                }
+                return redirect()->route('reponses', [
+                    'idQuestions' => session('idQuestions'),
+                    'reponsesFull' => session('reponsesFull'),
+                    'nbPoints' => session('nbPoints')
+                ]);
             }
             else {
                 return redirect()->route('round', ['id' => intval($data['round']) + 1]);
             }
         } else {
             if ($data['round'] == 10) {
-                return redirect()->route('reponses', ['idQuestions' => session('idQuestions'), 'reponsesFull' => session('reponsesFull')]);
+                $user = User::find(auth()->user()->id);
+                $user->nbParties = $user->nbParties +1;
+                if (session('nbPoints') > 5) {
+                    $user->nbVictoires = $user->nbVictoires +1;
+                    $user->save();
+                }
+                else {
+                    $user->nbDefaites = $user->nbDefaites +1;
+                    $user->save();
+                }
+                return redirect()->route('reponses', ['idQuestions' => session('idQuestions'), 'reponsesFull' => session('reponsesFull'), 'nbPoints' => session('nbPoints')]);
             }
             else {
                 return redirect()->route('round', ['id' => intval($data['round']) + 1]);
