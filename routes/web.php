@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReglesController;
 use App\Http\Controllers\ClassementController;
+use App\Http\Controllers\JouerController;
 
 
 /*
@@ -61,3 +62,8 @@ Route::get('/classement', [ClassementController::class, 'classement'])->name('cl
 Route::get('/catastrophes-naturelles', function () {return view('catastrophes');})->name('catastrophes-naturelles');
 
 Route::get('/eco-gestes', function () {return view('eco');})->name('eco-gestes');
+
+Route::get('/jouer', [JouerController::class, 'index'])->name('jouer');
+Route::get('/jouer/{id}', [JouerController::class, 'round'])->name('round');
+Route::post('/jouer/verif', [JouerController::class, 'verif'])->name('verif');
+Route::get('/reponses', [JouerController::class, 'reponses'])->name('reponses');

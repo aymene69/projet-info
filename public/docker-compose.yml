@@ -1,0 +1,98 @@
+version: "3"
+
+networks:
+  traefik_default:
+    external: true
+
+services:
+  webserver:
+    build:
+      context: ./bin/${PHPVERSION}
+    container_name: "${COMPOSE_PROJECT_NAME}-${PHPVERSION}"
+    restart: "always"
+    links:
+      - database
+    networks:
+      - ${TRAEFIK_NETWORK}
+    volumes:
+      - ${DOCUMENT_ROOT-./www}:/var/www/html:rw
+      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${SSL_DIR-./config/ssl}:/etc/apache2/ssl/
+      - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
+      - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+      - ${XDEBUG_LOG_DIR-./logs/xdebug}:/var/log/xdebug
+    environment:
+      APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/html}
+      PMA_PORT: ${HOST_MACHINE_PMA_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      HOST_MACHINE_MYSQL_PORT: ${HOST_MACHINE_MYSQL_PORT}
+      XDEBUG_CONFIG: "client_host=host.docker.internal remote_port=${XDEBUG_PORT}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_default"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-web.entrypoints=web,websecure"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-web.rule=Host(`${WEBSITE_HOST}`)"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-web.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-web.tls=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-web.tls.certresolver=production"
+  database:
+    build:
+      context: "./bin/${DATABASE}"
+    container_name: "${COMPOSE_PROJECT_NAME}-${DATABASE}"
+    restart: "always"
+    ports:
+      - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
+    networks:
+      - ${TRAEFIK_NETWORK}
+    volumes:
+      - ${MYSQL_INITDB_DIR-./config/initdb}:/docker-entrypoint-initdb.d
+      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: "${COMPOSE_PROJECT_NAME}-phpmyadmin"
+    links:
+      - database
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PMA_ABSOLUTE_URI=https://${WEBSITE_HOST}/pma/
+      - PMA_ARBITRARY=1
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT}
+      - MEMORY_LIMIT=${MEMORY_LIMIT}
+    networks:
+      - ${TRAEFIK_NETWORK}
+    volumes:
+      - /sessions
+      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${TRAEFIK_NETWORK}"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-pma.entrypoints=web,websecure"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-pma.rule=Host(`${WEBSITE_HOST}`) && PathPrefix(`/pma`)"
+      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-pma-stripprefix.stripprefix.prefixes=/pma"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-pma.middlewares=${COMPOSE_PROJECT_NAME}-pma-stripprefix"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-pma.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true"
+  redis:
+    container_name: "${COMPOSE_PROJECT_NAME}-redis"
+    image: redis:latest
+    ports:
+      - "127.0.0.1:${HOST_MACHINE_REDIS_PORT}:6379"
+    networks:
+      - ${TRAEFIK_NETWORK}
