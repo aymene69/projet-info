@@ -19,7 +19,7 @@ session_start();
 
     <h3>Question n°{{ $idRound }}</h3>
     <h3>Niveau: {{ $questionHasard->questionLevel }}</h3>
-    <h4>Indices restants: {{ $user->nbIndices }}</h4>
+    <h4>Indices: {{ $questionHasard->indice }}</h4>
     <h2>{{ $questionHasard->question }}</h2>
     <img src="/image/{{ $questionHasard->questionImage }}" alt="round1" style="width: 100%; height: 100%;">
 
